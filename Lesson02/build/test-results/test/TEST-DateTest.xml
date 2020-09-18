@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DateTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-09-10T14:19:47" hostname="AH544" time="0.024">
+<testsuite name="DateTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-09-18T11:18:52" hostname="vadim-HP" time="0.01">
   <properties/>
-  <testcase name="dateTest()" classname="DateTest" time="0.024"/>
+  <testcase name="dateTest()" classname="DateTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
