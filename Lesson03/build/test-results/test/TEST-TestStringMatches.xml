@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestStringMatches" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-09-20T10:18:08" hostname="pc" time="0.023">
+  <properties/>
+  <testcase name="testExctensionFunction()" classname="TestStringMatches" time="0.023"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
