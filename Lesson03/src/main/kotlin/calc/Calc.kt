@@ -23,9 +23,21 @@ fun List<Int>.sum() : Int {
     return result
 }
 
-fun isValidId(id : String) : Boolean {
-    val regex = """[_a-zA-z]{1}[a-zA-Z0-9_]{3,}"""
+fun isValidIdentifier0(id : String) : Boolean {
+    val regex = """[_a-zA-z]{1}[a-zA-Z0-9_]{1,}"""
     return id.matches(regex.toRegex())
+}
+
+fun isValidIdentifier(id : String) : Boolean {
+
+    if (id.length == 0) return false
+    val fCh = id.first()
+    if (fCh != '_' && fCh !in 'a'..'z' && fCh !in 'A'..'Z') return false
+    val ss = id.substring(1, id.length)
+    for (c in ss) {
+        if (c != '_' && c !in 'a'..'z' && c !in 'A'..'Z' && c !in '0'..'9') return false
+    }
+    return true
 }
 
 interface Animal {
@@ -61,8 +73,14 @@ fun eval(e: Expr) : Int =
         else -> throw IllegalArgumentException("Invalid expression")
     }
 fun  main() {
-    val farm = listOf<Animal>(Dog(), Goat(), Cow())
+    /*val farm = listOf<Animal>(Dog(), Goat(), Cow())
     farm.forEach { it.say() }
 
-    println(eval(Sum( Sum( Num(2), Num(7)), Num(10))))
+    println(eval(Sum( Sum( Num(2), Num(7)), Num(10))))*/
+    println(isValidIdentifier("name"))   // true
+    println(isValidIdentifier("_name"))  // true
+    println(isValidIdentifier("_12"))    // true
+    println(isValidIdentifier(""))       // false
+    println(isValidIdentifier("012"))    // false
+    println(isValidIdentifier("no$"))    // false
 }

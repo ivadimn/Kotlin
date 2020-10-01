@@ -17,6 +17,15 @@ enum class Color(
         }
 }
 
+fun isValid(id : String) : Boolean {
+
+    val smallChars = 'a'..'z'
+    val largeChars = 'A'..'Z'
+
+    if (id.length == 0) return false
+    id.first()
+    return true
+}
 
 
 fun main() {
