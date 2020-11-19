@@ -10,8 +10,16 @@ val people = listOf(
     Person("Carol", 31)
 )
 
-val list = listOf(1, 2, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9)
+val list = listOf(1.1, 2.0, 3.0, 4.0, 5.0, 5.0, 6.0, 7.0, 8.0, 8.0, 9.0, 9.0)
 val nullableList : List<Int?> = listOf(1, 2, 3, 4,  null, 5, null, 6, 7, 8, 9)
+
+val listOflist = listOf(
+        listOf("123", "465", "789", "cia", "oon"),
+        listOf("ibm", "ibs", "kpmg"),
+)
+
+val map = mapOf(1 to "one", 2 to "two", 2 to "three", 4 to  "four")
+
 
 fun main(args : Array<String>) {
 
@@ -33,4 +41,21 @@ fun main(args : Array<String>) {
     //println(people.minByOrNull { it.age })
     println(list.distinct().map { it * it })
     println(people.filter { it.age > 30 }.map { it.name })
+
+    println(map.mapValues { it.value.toUpperCase() })
+    //any
+   /* println(people.any { it.age == 31 })
+    println(people.all { it.age == 31 })
+    println(people.count { it.age == 31 })
+    println(people.findLast { it.age == 31 })*/
+
+    println( people.sumBy { it.age }  )
+    println( people.map { it.age.toDouble() }.average())
+    //fold reduce
+    //println(list.fold(1.0,  { acc: Double, elem : Double -> acc * elem}))
+    //println(list.reduce { acc, d -> acc * d })
+    //println(people.groupBy { it.age })
+    //println(people.associateBy { it.age })
+    //println(people.partition { it.age > 30 })
+    println(listOflist.flatten().flatMap { it.toList() })
 }
