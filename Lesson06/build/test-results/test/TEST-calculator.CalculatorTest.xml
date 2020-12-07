@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="calculator.CalculatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-11-29T13:02:17" hostname="pc" time="0.03">
+  <properties/>
+  <testcase name="combineAddAndMul()" classname="calculator.CalculatorTest" time="0.03"/>
+  <system-out><![CDATA[init
+prepare
+prepare test
+tear test
+tear down
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
