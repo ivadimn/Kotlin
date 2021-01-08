@@ -1,11 +1,11 @@
 package ui
 
-import core.PDFPage
+import model.PDFPage
 import javax.swing.AbstractListModel
 
 class ImageListModel : AbstractListModel<PDFPage>(){
 
-    lateinit var list : List<PDFPage>
+    private var list : List<PDFPage> = emptyList()
 
     override fun getSize(): Int =if (list == null) 0 else list.size
 

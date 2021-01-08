@@ -1,6 +1,7 @@
 package ui
 
 import java.awt.FlowLayout
+import javax.swing.BorderFactory
 import javax.swing.JButton
 import javax.swing.JPanel
 
@@ -10,6 +11,7 @@ class Toolbar : JPanel() {
     private lateinit var saveButton : JButton
 
     init {
+        border = BorderFactory.createEtchedBorder()
         newButton = JButton("New")
         openButton = JButton("Open")
         saveButton = JButton("Save")
