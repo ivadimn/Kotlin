@@ -4,11 +4,11 @@ import controller.Controller
 import java.awt.*
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
+import java.io.File
 import javax.swing.*
 
 class MainFrame : JFrame() {
 
-    private val fileChooser : JFileChooser = JFileChooser()
     private val toolbar: Toolbar
     private val tabPane : JTabbedPane
 
@@ -53,14 +53,21 @@ class MainFrame : JFrame() {
         val openFileItem = JMenuItem("Открыть...")
         val saveFileItem = JMenuItem("Сохранить")
         val saveAsFileItem = JMenuItem("Сохранить как...")
-        val exitItem = JMenuItem("Выход")
 
+        val export = JMenu("Экспортировать")
+        val exportItemAsImages = JMenuItem("в файлы изображений...")
+        export.add(exportItemAsImages)
+
+        val exitItem = JMenuItem("Выход")
 
         fileMenu.add(openFileItem)
         fileMenu.addSeparator()
         fileMenu.add(saveFileItem)
         fileMenu.add(saveAsFileItem)
         fileMenu.addSeparator()
+        fileMenu.add(export)
+
+
         fileMenu.add(exitItem)
 
 
@@ -72,6 +79,7 @@ class MainFrame : JFrame() {
         exitItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK)
 
         openFileItem.addActionListener {
+            val fileChooser : JFileChooser = JFileChooser()
             fileChooser.fileFilter = PdfFileFilter()
             if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 
@@ -87,6 +95,27 @@ class MainFrame : JFrame() {
             val key = (tabPane.selectedComponent as TabPdfPanel).key
             Controller.save(key)
         }
+
+        saveAsFileItem.addActionListener {
+            val fileChooser : JFileChooser = JFileChooser()
+            fileChooser.fileFilter = PdfFileFilter()
+            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                val key = (tabPane.selectedComponent as TabPdfPanel).key
+                Controller.saveAs(key, fileChooser.selectedFile)
+            }
+        }
+
+        exportItemAsImages.addActionListener {
+            val fileChooser : JFileChooser = JFileChooser()
+            fileChooser.currentDirectory = File(".")
+            fileChooser.fileFilter = ImageFileFilter()
+            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                val key = (tabPane.selectedComponent as TabPdfPanel).key
+                Controller.exportAsImages(key, fileChooser.selectedFile)
+            }
+        }
+
+
 
         exitItem.addActionListener {
             System.exit(0)

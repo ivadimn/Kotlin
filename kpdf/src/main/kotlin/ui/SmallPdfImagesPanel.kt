@@ -1,14 +1,11 @@
 package ui
 
-import controller.Controller
 import listeners.PageListener
 import listeners.SelectListener
 import model.PDFPage
-import java.awt.BorderLayout
-import java.awt.Dimension
+import java.awt.*
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
-import java.awt.event.MouseListener
 import javax.swing.*
 import javax.swing.event.ListSelectionEvent
 import javax.swing.event.ListSelectionListener
@@ -28,6 +25,8 @@ class SmallPdfImagesPanel(
         layout = BorderLayout()
         listModel = ImageListModel()
         imageList = JList(listModel)
+        //imageList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        //imageList.setLayoutOrientation(JList.VERTICAL_WRAP);
         imageList.setCellRenderer(SmallImageCellRenderer())
         add(JScrollPane(imageList), BorderLayout.CENTER)
         imageList.addListSelectionListener(object : ListSelectionListener {
@@ -59,17 +58,24 @@ class SmallPdfImagesPanel(
     }
 
     fun initPopupMenu() {
-        val insertItem = JMenuItem("Insert page...")
-        val deleteItem = JMenuItem("Delete page")
+        val insertItem = JMenuItem("Вставить страницу...")
+        val deleteItem = JMenuItem("Удалить страницу")
+        val exportItem = JMenuItem("Сохранить как изображение")
 
         insertItem.addActionListener {
-            insertImage()
+            insertPage()
         }
         deleteItem.addActionListener {
-            removeImage()
+            removePage()
+        }
+
+        exportItem.addActionListener {
+            exportPage()
         }
         popup.add(insertItem)
         popup.add(deleteItem)
+        popup.addSeparator()
+        popup.add(exportItem)
 
         imageList.addMouseListener(object : MouseAdapter() {
             override fun mousePressed(e: MouseEvent?) {
@@ -77,12 +83,10 @@ class SmallPdfImagesPanel(
                     popup.show(imageList, e.x, e.y)
                 }
             }
-
         })
-
     }
 
-    private fun insertImage() {
+    private fun insertPage() {
         fileChooser.fileFilter = ImageFileFilter()
         val index = imageList.selectedIndex + 1
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -90,10 +94,17 @@ class SmallPdfImagesPanel(
         }
     }
 
-    private fun removeImage() {
+    private fun removePage() {
         val index = imageList.selectedIndex
         if (index >= 0)
             pageListener?.deletePage(index)
     }
+
+    private fun exportPage() {
+        val index = imageList.selectedIndex
+        if (index >= 0)
+            pageListener?.exportPage(index)
+    }
+
 
 }

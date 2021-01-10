@@ -1,17 +1,13 @@
 package controller
 
-import Render.loadDocument
+import core.getFileExtension
 import model.PDFDocument
 import model.PDFPage
-import ui.MainFrame
 import java.awt.image.BufferedImage
 import java.io.File
-import java.io.IOException
+
 import javax.imageio.ImageIO
-import javax.swing.JOptionPane
-import javax.swing.Renderer
-import javax.swing.SwingContainer
-import javax.swing.SwingUtilities
+
 
 object Controller {
 
@@ -39,7 +35,22 @@ object Controller {
         val doc = pdfDocs[key]
         if (doc != null)
             Render.saveToFile(doc.document, doc.pages, File(key))
-            //Repository.savePdf(doc, )
+    }
+
+    fun saveAs(key : String, file: File) {
+        val doc = pdfDocs[key]
+        if (doc != null)
+            Render.saveToFile(doc.document, doc.pages, file)
+    }
+
+    fun exportAsImages(key : String, file: File) {
+        val doc = pdfDocs[key]
+        if (doc != null)
+            Render.saveAsImages(file, doc.pages)
+    }
+
+    fun exportAsImage(image : BufferedImage, file: File) {
+        Render.saveImage(image, file)
     }
 
 }

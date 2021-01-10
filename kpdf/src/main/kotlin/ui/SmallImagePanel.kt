@@ -1,5 +1,6 @@
 package ui
 
+import org.imgscalr.Scalr
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
@@ -17,12 +18,23 @@ class SmallImagePanel(
 
     var isFocused = false
     val goldNumber = 1.618F
-    val panelWidth = 120
-    val panelHeight = panelWidth  * goldNumber
+    val panelWidth = 100
+    val panelHeight : Int
 
     init {
         setBorder()
-        preferredSize = Dimension(panelWidth, panelHeight.toInt())
+
+        if (image.width < image.height) {
+            panelHeight = panelWidth + ( panelWidth * (image.width / image.height.toDouble())).toInt()
+        }
+        else if (image.width > image.height) {
+            panelHeight = panelWidth - ( panelWidth * (image.width / image.height.toDouble())).toInt()
+        }
+        else {
+            panelHeight = panelWidth
+        }
+        preferredSize = Dimension(panelWidth, panelHeight)
+        println("$panelWidth, $panelHeight")
     }
 
     fun setBorder() {
@@ -35,7 +47,7 @@ class SmallImagePanel(
     override fun paintComponent(g: Graphics?) {
         super.paintComponent(g)
         val g2 = g?.create() as Graphics2D
-        val w = image.width
+        /*val w = image.width
         val h = image.height
         val bi = BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR)
         val gl = bi.graphics
@@ -45,13 +57,26 @@ class SmallImagePanel(
         val transform = AffineTransform()
         transform.setToScale(sx, sy)
         val top = AffineTransformOp(transform, AffineTransformOp.TYPE_BICUBIC)
-        setBorder()
+
         var x = 0
         if (size.width > w * sx) {
             x = (size.width - (w * sx).toInt()) / 2
         }
-        g2.drawImage(bi, top, x + 5, 5)
+        g2.drawImage(bi, top, x + 5, 5)*/
+        setBorder()
+        draw(g2)
         g2.dispose()
+    }
+
+    private fun draw(g2 : Graphics2D) {
+        val newWidth = size.width - 10
+        val newHeight = size.height - 10
+        val newImage = Scalr.resize(
+            image, Scalr.Method.BALANCED, Scalr.Mode.AUTOMATIC,
+                    newWidth, newHeight, Scalr.OP_ANTIALIAS )
+        g2.drawImage(newImage, 5, 5,null)
+
+
     }
 
 

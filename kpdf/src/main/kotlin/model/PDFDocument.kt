@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage
 class PDFDocument(var document : PDDocument,
                     val fileName : String) {
 
-    private val pdfPages : MutableList<PDFPage> = mutableListOf()
+    private var pdfPages : MutableList<PDFPage> = mutableListOf()
     var title : String
     init {
         title = fileName
@@ -18,6 +18,10 @@ class PDFDocument(var document : PDDocument,
 
     val pages
     get() = pdfPages
+
+    fun setPages(newPages : MutableList<PDFPage>) {
+        pdfPages = newPages
+    }
 
     fun addPage(page :PDFPage) {
         pdfPages.add(page)

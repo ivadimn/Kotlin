@@ -7,7 +7,9 @@ import model.PDFDocument
 import model.PDFPage
 import java.awt.BorderLayout
 import java.awt.Dimension
+import java.awt.image.BufferedImage
 import java.io.File
+import javax.swing.JFileChooser
 import javax.swing.JPanel
 import javax.swing.JSplitPane
 
@@ -57,8 +59,20 @@ class TabPdfPanel(
         updatePane()
     }
 
+    override fun exportPage(index: Int) {
+        val image = Controller.getPages(key)[index].image
+        val fileChooser = JFileChooser()
+        fileChooser.fileFilter = ImageFileFilter()
+        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            Controller.exportAsImage(image, fileChooser.selectedFile)
+        }
+    }
+
+
     private fun updatePane() {
         smallPdfImagesPanel.refresh()
         bigPdfImagesPanel.refresh()
     }
+
+
 }
