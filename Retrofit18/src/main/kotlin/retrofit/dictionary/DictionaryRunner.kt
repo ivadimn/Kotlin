@@ -2,7 +2,8 @@ import retrofit.dictionary.YandexDictionaryService
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
-val key = "dict.1.1.20210111T111918Z.0f820773933ab066.46a8b39ad29bc680e3e545c9254d10a1dd8e4d2b"
+
+val key = "dict.1.1.20170402T202525Z.1ed8dd7c23205718.efda3a2c4bdf834b16909622280b20b0d60840a1"
 //https://dictionary.yandex.net/api/v1/dicservice/lookup?key=dict.1.1.20210111T111918Z.0f820773933ab066.46a8b39ad29bc680e3e545c9254d10a1dd8e4d2b&lang=en-ru&text=time
 val urlXml =
     "https://dictionary.yndex.net/api/v1/dicservice/lookup?key=&lang=en-ru&text=time"
